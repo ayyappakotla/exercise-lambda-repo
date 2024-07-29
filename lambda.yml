@@ -4,14 +4,14 @@ Resources:
     Properties:
       Description: Fetching the params from SSM Parameter store
       MemorySize: 256
-      Runtime: Python3.8
+      Runtime: python3.8
       Handler: index.lambda_handler
       Role: !GetAtt LambdaRole.Arn
       FunctionName: 'exercise-lambda'
       Timeout: 30
       Code:
         S3Bucket: 'dcx-sample-bucket'
-        S3Key: lambda.py
+        S3Key: index.zip
 
 
   LambdaRole:
@@ -32,7 +32,7 @@ Resources:
               - Effect: Allow
                 Action:
                   - 'ssm:GetParameter'
-                Resource: '/sample/lambda-extract'
+                Resource: 'arn:aws:ssm:ap-southeast-2:010928202781:parameter/sample/lambda-extract'
               - Effect: Allow
                 Action:
                   - 'logs:CreateLogGroup'
